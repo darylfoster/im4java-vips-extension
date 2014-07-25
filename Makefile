@@ -75,7 +75,7 @@ src/org/im4java/core/IMOps.java:
 
 compile: compile-lib
 
-TARGET=1.6
+TARGET=1.7
 compile-lib: src
 	rm -fr build/*
 	mkdir -p build

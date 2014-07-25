@@ -18,6 +18,21 @@
       For a detailed list of changes, have a look at the ChangeLog.
     </note>
 
+    <section id="R_1_4_1">
+      <title>Release 1.4.1</title>
+      <ul>
+	<li>
+	  Added class <code>VipsOps</code>.
+	</li>
+	<li>
+	  Added class <code>VipsOperation</code>.
+	</li>
+	<li>
+	  Added class <code>VipsThumbnailCmd</code>.
+	</li>
+      </ul>
+    </section>
+
     <section id="R_1_4_0">
       <title>Release 1.4.0</title>
       <ul>

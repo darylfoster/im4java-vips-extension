@@ -1,3 +1,10 @@
+2014-07-24
+	* version.inc: upgraded version to 1.4.1
+
+	* doc-src/xdocs/relnotes.xml: added release-notes for version 1.4.1
+
+	* doc-src/xdocs/index.xml: updated version-number to 1.4.1
+
 2012-12-27
 
 	* version.inc: upgraded version to 1.4.0
