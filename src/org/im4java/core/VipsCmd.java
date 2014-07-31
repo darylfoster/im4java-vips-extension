@@ -1,5 +1,5 @@
 /**
- * This class models the command-line of VIPS.
+ * This class wraps the VIPS command vips.
  *
  * Copyright (c) 2014 by Daryl Foster (darylfoster@netzero.net)
  *
@@ -25,19 +25,22 @@
 package org.im4java.core;
 
 /**
- *   This class models the command-line of VIPS.
- *   It extends the class VipsOps.
+ *  This class wraps the VIPS command vips.
  *
  *  @author  $Author: Daryl Foster $
  */
-public class VipsOperation
-        extends VipsOps
+public class VipsCmd
+        extends ImageCommand
 {
     //~--- constructors -------------------------------------------------------
 
     /**
-     * Constructs VipsOperation
+     * Constructs VipsCmd
      *
      */
-    public VipsOperation () {}
+    public VipsCmd ()
+    {
+        super ();
+        setCommand ("vips");
+    }
 }

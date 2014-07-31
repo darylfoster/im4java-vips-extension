@@ -36,9 +36,9 @@ public class VipsOps
     //~--- constructors -------------------------------------------------------
 
     /**
-     * Constructs VIPSOps.
+     * Constructs VipsOps.
      *
-     * The constructor is protected. You should only use subclasses of VIPSOps.
+     * The constructor is protected. You should only use subclasses of VipsOps.
      *
      */
     protected VipsOps () {}
@@ -46,149 +46,99 @@ public class VipsOps
     //~--- methods ------------------------------------------------------------
 
     /**
-     * Add option -e to VIPS command-line.
-     * Export thumbnails with this ICC profile. Images are only colour-
-     * transformed if there is both an output and an input profile available.
-     * The input profile can either be embedded in the input image or supplied
-     * with the --iprofile option.
+     * Adds compression type for png output image.
      *
      *
-     * @param profile
+     * @param compressionType
      *
      * @return
      */
-    public VipsOps eProfile (String profile)
+    public VipsOps addPngCompressionType (int compressionType)
     {
-        iCmdArgs.add ("-e");
-        iCmdArgs.add (profile);
+        String compressionArgument = ":" + Integer.toString (compressionType);
+
+        iCmdArgs.add (IMG_PLACEHOLDER + compressionArgument);
 
         return this;
     }
 
     /**
-     * Add option -i to VIPS command-line.
-     * Import images with this ICC profile, if no profile is embdedded in the
-     * image. Images are only colour-transformed if there is both an output and
-     * an input profile available. The output profile should be supplied with
-     * the --oprofile option.
+     * Sets deep zoom pyramid depth. Possible values are 1pixel, 1tile, and 1.
      *
      *
-     * @param profile
+     * @param depthType
      *
      * @return
      */
-    public VipsOps iProfile (String profile)
+    public VipsOps depth (String depthType)
     {
-        iCmdArgs.add ("-i");
-        iCmdArgs.add (profile);
+        iCmdArgs.add ("--depth");
+        iCmdArgs.add (depthType);
 
         return this;
     }
 
     /**
-     * Add option -l to VIPS command-line.
-     * Don't delete the profile from the output image. Since all output images
-     * will generally have the same profile, vipsthumbnail(1) will usually
-     * delete it. This option leaves the profile inside the image.
+     * Sets deep zoom pyramid directory layout. Possible values are dz, zoomify,
+     * and google.
      *
+     *
+     * @param layoutType
      *
      * @return
      */
-    public VipsOps noDelete ()
+    public VipsOps layout (String layoutType)
     {
-        iCmdArgs.add ("-l");
+        iCmdArgs.add ("--layout");
+        iCmdArgs.add (layoutType);
 
         return this;
     }
 
     /**
-     * Add option -n to VIPS command-line.
-     * By default, vipsthumbnail(1) will sharpen thumbnails slightly to make
-     * them look more pleasing. This option disables this sharpening.
-     *
-     *
-     * @return
-     */
-    public VipsOps noSharpen ()
-    {
-        iCmdArgs.add ("-n");
-
-        return this;
-    }
-
-    /**
-     * Add option -o to VIPS command-line.
-     * Set the output format string. The input filename has any file type
-     * suffix removed, then that value is substituted into FORMAT replacing %s.
-     * The default value is tn_%s.jpg meaning JPEG output, with tn_ prepended.
-     * You can add format options too, for example tn_%s.jpg:20 will write JPEG
-     * images with Q set to 20.
-     *
-     *
-     * @param format
-     *
-     * @return
-     */
-    public VipsOps outputFormat (String format)
-    {
-        iCmdArgs.add ("-o");
-        iCmdArgs.add (format);
-
-        return this;
-    }
-
-    /**
-     * Add option -p to the VIPS command-line.
-     * Set the output format string. The input filename has any file type
-     * suffix removed, then that value is substituted into FORMAT replacing %s.
-     * The default value is tn_%s.jpg meaning JPEG output, with tn_ prepended.
-     * You can add format options too, for example tn_%s.jpg:20 will write JPEG
-     * images with Q set to 20.
-     *
-     *
-     * @param interpolator
-     *
-     * @return
-     */
-    public VipsOps resampleInterpolator (String interpolator)
-    {
-        iCmdArgs.add ("-p");
-        iCmdArgs.add (interpolator);
-
-        return this;
-    }
-
-    /**
-     * Add option -s to the VIPS command-line.
-     * Set the output thumbnail size to pixels x pixels. The image is shrunk so
-     * that it just fits within this area. Images which are smaller than this
-     * are expanded.
+     * Sets deep zoom tile overlap in pixels.
      *
      *
      * @param pixels
      *
      * @return
      */
-    public VipsOps size (Integer pixels)
+    public VipsOps overlap (int pixels)
     {
-        iCmdArgs.add ("-s");
-        iCmdArgs.add (pixels.toString ());
+        iCmdArgs.add ("--overlap");
+        iCmdArgs.add (Integer.toString (pixels));
 
         return this;
     }
 
     /**
-     * Add option -v to the VIPS command-line.
-     * vipsthumbnail(1) normally runs silently, except for warning and error
-     * messages. This option makes it print a list of the operations it
-     * performs on each image.
+     * Sets deep zoom filename suffix for tiles.
      *
+     *
+     * @param suffixType
      *
      * @return
      */
-    public VipsOps verbose ()
+    public VipsOps suffix (String suffixType)
     {
-        iCmdArgs.add ("-v");
+        iCmdArgs.add ("--suffix");
+        iCmdArgs.add (suffixType);
+
+        return this;
+    }
+
+    /**
+     * Sets deep zoom tile size in pixels.
+     *
+     *
+     * @param pixels
+     *
+     * @return
+     */
+    public VipsOps tileSize (int pixels)
+    {
+        iCmdArgs.add ("--tile-size");
+        iCmdArgs.add (Integer.toString (pixels));
 
         return this;
     }

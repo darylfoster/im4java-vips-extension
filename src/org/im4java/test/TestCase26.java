@@ -1,5 +1,5 @@
 /**
- * This class implements the basic test of vipsthumbnail.
+ * This class implements the basic test of vips im_copy.
  *
  * Copyright (c) 2014 by Daryl Foster (darylfoster@netzero.net)
  *
@@ -31,11 +31,11 @@ import org.im4java.core.*;
 //~--- classes ----------------------------------------------------------------
 
 /**
- *  This class implements the basic test of vipsthumbnail.
+ *  This class implements the basic test of vips im_copy.
  *
  *  @author  $Author: Daryl Foster $
  */
-public class TestCase25
+public class TestCase26
         extends AbstractTestCase
 {
     //~--- get methods --------------------------------------------------------
@@ -49,7 +49,7 @@ public class TestCase25
      */
     public String getDescription ()
     {
-        return "simple use of vipsthumbnail";
+        return "simple use of vips im_copy";
     }
 
     //~--- methods ------------------------------------------------------------
@@ -64,7 +64,7 @@ public class TestCase25
      */
     public static void main (String[] args)
     {
-        TestCase25 tc = new TestCase25 ();
+        TestCase26 tc = new TestCase26 ();
 
         tc.runTest (args);
     }
@@ -79,7 +79,7 @@ public class TestCase25
     public void run ()
             throws Exception
     {
-        System.err.println (" 25. Testing vipsthumbnail ...");
+        System.err.println (" 26. Testing vips im_copy ...");
 
         // setup optional control-variables
         boolean induceError = false;
@@ -89,7 +89,7 @@ public class TestCase25
             induceError = Boolean.parseBoolean (iArgs[0]);
         }
 
-        VipsThumbnailOperation op = new VipsThumbnailOperation ();
+        VipsOperation op = new VipsOperation ();
 
         if (!induceError)
         {
@@ -97,14 +97,20 @@ public class TestCase25
             op.addImage ();
         }
 
-        op.size (200);
-        op.outputFormat ("tulip1_thumbnail.jpg");
+        op.addImage ();
 
-        String[]         images       = new String[] {iImageDir + "tulip1.jpg"};
-        VipsThumbnailCmd thumbnailCmd = new VipsThumbnailCmd ();
+        String[]    images  = new String[] {iImageDir + "tulip1.jpg", iImageDir + "tulip1.png"};
+        VipsCopyCmd copyCmd = new VipsCopyCmd ();
 
-        thumbnailCmd.createScript (iImageDir + "append.sh", op);
-        thumbnailCmd.run (op, (Object[]) images);
-        DisplayCmd.show (iImageDir + "tulip1_thumbnail.jpg");
+        copyCmd.createScript (iImageDir + "append.sh", op);
+        copyCmd.run (op, (Object[]) images);
+        DisplayCmd.show (iImageDir + "tulip1.png");
+        op = new VipsOperation ();
+        op.addImage ();
+        op.addPngCompressionType (9);
+        images = new String[] {iImageDir + "tulip1.jpg", iImageDir + "tulip1-c9.png"};
+        copyCmd.createScript (iImageDir + "append.sh", op);
+        copyCmd.run (op, (Object[]) images);
+        DisplayCmd.show (iImageDir + "tulip1-c9.png");
     }
 }
