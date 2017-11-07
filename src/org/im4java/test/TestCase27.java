@@ -98,17 +98,17 @@ public class TestCase27
         }
 
         op.addImage ();
-        op.layout ("zoomify");
+        op.layout ("google");
         op.suffix (".png[compression=9]");
         op.overlap (0);
         op.tileSize (100);
-        op.depth ("1");
+        op.depth ("onetile");
 
         String[]        images      = new String[] {iImageDir + "tulip1.jpg", iImageDir + "tiles"};
         VipsDeepZoomCmd deepZoomCmd = new VipsDeepZoomCmd ();
 
         deepZoomCmd.createScript (iImageDir + "append.sh", op);
         deepZoomCmd.run (op, (Object[]) images);
-        DisplayCmd.show (iImageDir + "tiles/TileGroup0/0-2-3.png");
+        DisplayCmd.show (iImageDir + "tiles/2/0/1.png");
     }
 }
